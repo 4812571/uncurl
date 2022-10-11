@@ -7,7 +7,8 @@ with atheris.instrument_imports():
 
 def testOneInput(data):
     fdp = atheris.FuzzedDataProvider(data)
-    print(uncurl.parse("curl 'https://pypi.python.org/pypi/uncurl' -H 'Accept-Encoding: gzip,deflate,sdch'"))
+    in_str = fdp.ConsumeUnicodeNoSurrogates(64)
+    uncurl.parse(in_str)
         
 def main():
     atheris.Setup(sys.argv, testOneInput)
